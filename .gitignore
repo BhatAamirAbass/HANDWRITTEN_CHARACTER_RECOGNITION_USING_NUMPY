@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+models/*.keras
+data/raw/emnist/*
+!data/raw/emnist/.gitkeep
+results/

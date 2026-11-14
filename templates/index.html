@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handwritten Character Recognition</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <p class="eyebrow">EMNIST BYCLASS · CONVOLUTIONAL NEURAL NETWORK</p>
+      <h1>Handwritten Character Recognition</h1>
+      <p class="subtitle">Draw one digit or letter and let the model recognize it.</p>
+    </header>
+
+    <section class="layout">
+      <div class="card">
+        <div class="section-heading">
+          <div><h2>Draw a character</h2><p>Digits 0–9 and letters A–Z, a–z</p></div>
+          <span class="tag">62 classes</span>
+        </div>
+        <canvas id="canvas" width="280" height="280"></canvas>
+        <div class="actions">
+          <button id="clear" class="secondary">Clear</button>
+          <button id="recognize" class="primary">Recognize</button>
+        </div>
+        <p id="status" class="status" aria-live="polite">Ready.</p>
+      </div>
+
+      <div class="card result-card">
+        <h2>Prediction</h2>
+        <div class="answer">
+          <span class="label">RECOGNIZED CHARACTER</span>
+          <div id="character">?</div>
+          <p id="confidence">Draw something to begin.</p>
+        </div>
+        <h3>Top 3 predictions</h3>
+        <div id="top3" class="top3">Results will appear here.</div>
+      </div>
+    </section>
+    <footer>Trained CNN · EMNIST ByClass · 62 character classes</footer>
+  </main>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
