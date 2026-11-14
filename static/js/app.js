@@ -90,7 +90,22 @@ recognizeButton.addEventListener("click", async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ image: canvas.toDataURL("image/png") })
     });
-    const result = await response.json();
+    // const result = await response.json();
+    const responseText = await response.text();
+
+let result = {};
+
+try {
+  result = responseText ? JSON.parse(responseText) : {};
+} catch (error) {
+  throw new Error(
+    `Server returned an invalid response (HTTP ${response.status}).`
+  );
+}
+
+if (!response.ok) {
+  throw new Error(result.error || `HTTP error: ${response.status}`);
+}
     if (!response.ok) throw new Error(result.error || "Prediction failed.");
     document.getElementById("character").textContent = result.character;
     document.getElementById("confidence").textContent =
