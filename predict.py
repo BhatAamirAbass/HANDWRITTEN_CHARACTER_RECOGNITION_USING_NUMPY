@@ -14,10 +14,17 @@ class CharacterPredictor:
             )
         self.model = tf.keras.models.load_model(model_path)
 
+    
     def predict(self, raw_emnist_image):
         """Predict a raw 28x28 EMNIST-oriented grayscale image."""
+
+        # Preprocess the input image
         batch = preprocess_single_emnist_image(raw_emnist_image)
-        scores = self.model.predict(batch, verbose=0)[0]
+
+        # Direct model inference instead of model.predict()
+        scores = self.model(batch, training=False).numpy()[0]
+
+        # Find the three highest confidence classes
         top_indices = np.argsort(scores)[-3:][::-1]
         best = int(top_indices[0])
 
@@ -33,3 +40,4 @@ class CharacterPredictor:
                 for index in top_indices
             ],
         }
+
