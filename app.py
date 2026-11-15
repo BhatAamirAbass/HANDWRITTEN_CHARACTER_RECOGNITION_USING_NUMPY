@@ -35,7 +35,7 @@ def preprocess_canvas_image(image_bytes):
 
     canvas = Image.new("L", (28, 28), 0)
     canvas.paste(image, ((28 - image.width) // 2, (28 - image.height) // 2))
-    return np.asarray(canvas, dtype=np.uint8)
+    return np.asarray(canvas, dtype=np.uint8).T
 
 
 @app.route("/")
